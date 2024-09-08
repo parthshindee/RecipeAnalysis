@@ -12,7 +12,6 @@ This section introduces the dataset and the main question driving the project: "
 
 **Dataset Details:**
 - The dataset contains recipes from a popular cooking platform, including information such as preparation time, ingredients, user ratings, and nutritional values.
-- Number of rows: [Include number]
 - Relevant columns: `minutes`, `n_ingredients`, `tags`, `nutrition`, `description`, `rating`
 - Description of relevant columns: Includes preparation time, number of ingredients, recipe tags, nutritional information, user-provided description, and average ratings.
 
