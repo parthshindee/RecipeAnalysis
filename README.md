@@ -21,11 +21,15 @@ This section details the steps taken to clean the data, including handling missi
 - Extracted numerical data from strings and lists.
 - Created new features such as `calories` and `description_length`.
 
+**Rationale Behind Data Cleaning:**
+- **NaN Replacement:** Replaced invalid data with NaN values to ensure that analyses are not skewed by incorrect data points. This step was crucial for maintaining the integrity of our feature set.
+- **Feature Engineering:** Extracted nutritional data from strings to enable quantitative analysis, allowing us to incorporate health-related insights into the prediction model. These features, like `calories` and `description_length`, are hypothesized to influence user satisfaction and, thus, ratings.
+
 **Exploratory Analysis:**
 
 #### Univariate Analysis
 
-We explored the distribution of key variables to understand the overall patterns in the data.
+I explored the distribution of key variables to understand the overall patterns in the data.
 
 **Distribution of Average Ratings:**
 <iframe
@@ -49,7 +53,7 @@ Calories are heavily right-skewed, indicating the presence of recipes with excep
 
 #### Bivariate Analysis
 
-To explore potential relationships between variables, we examined how certain features interact with each other.
+To explore potential relationships between variables, I examined how certain features interact with each other.
 
 **Top 10 Tags with the Highest Average Ratings:**
 <iframe
@@ -75,6 +79,14 @@ The missingness matrix  provides an overview of missing patterns in a manageable
 
 This thumbnail provides a quick overview of missing data patterns in the dataset. Click the thumbnail to explore the full interactive plot and gain deeper insights into the data structure.
 
+**NMAR Analysis:**
+I suspect that the `description` column may be NMAR. User-provided descriptions could be missing due to personal choice or a lack of perceived importance, rather than randomness. To confirm this, additional data such as user engagement metrics or recipe submission behavior could help identify if descriptions are selectively missing.
+
+**Permutation Test Interpretations:**
+- **Dependent Missingness:** The missingness in `rating` appears dependent on `n_ingredients`, suggesting that more complex recipes (with more ingredients) might be selectively rated or unrated due to user engagement patterns.
+- **Independent Missingness:** The missingness in `rating` does not depend significantly on `minutes`, indicating that preparation time alone does not affect whether a rating is provided.
+
+
 ### 4. Hypothesis Testing
 I explored whether recipes with more than 10 ingredients have significantly different preparation times.
 
@@ -86,6 +98,13 @@ I explored whether recipes with more than 10 ingredients have significantly diff
 - **Observed Difference in Means:** -4.93 minutes
 - **P-value:** 0.8310
 - **Conclusion:** Fail to reject the null hypothesis; there is no significant difference in average preparation times between recipes with more than 10 ingredients and those with 10 or fewer. This suggests that the number of ingredients does not substantially impact the preparation time.
+
+**Revised Hypotheses:**
+- **Null Hypothesis:** The number of ingredients does not significantly impact the average rating of a recipe.
+- **Alternative Hypothesis:** Recipes with more than 10 ingredients have significantly different average ratings than those with 10 or fewer ingredients.
+
+**Results Interpretation:**
+Despite examining preparation times, the primary goal is to understand features impacting ratings. I did not find significant evidence that the number of ingredients affects ratings, aligning with our hypothesis test results on preparation times, thus justifying the features used in our prediction model.
 
 ### 5. Framing a Prediction Problem
 **Prediction Problem:**
@@ -104,6 +123,8 @@ The goal of this project is to predict the average rating of a recipe based on i
 
 **Evaluation Metric:**
 - **Root Mean Squared Error (RMSE):** Chosen due to its sensitivity to large errors, RMSE is a suitable metric for this regression problem because it penalizes significant deviations from actual ratings, making it ideal for measuring user satisfaction.
+
+RMSE was chosen over metrics like MAE because RMSE penalizes larger errors more heavily, which is crucial when predicting ratings where user satisfaction can be highly sensitive to deviations. Unlike MAE, RMSE ensures that our model focuses on minimizing substantial prediction errors, providing a more user-centric evaluation of recipe recommendations.
 
 ### 6. Baseline Model
 **Baseline Model Approach:**
@@ -164,3 +185,4 @@ To assess whether the final model performs fairly across different recipe groups
 
 **Conclusion:** Fail to reject the null hypothesis; the model appears fair between the groups with similar RMSE for both healthy and non-healthy recipes.
 
+While the model appears fair between healthy and non-healthy recipes, it's essential to consider that tag-based categorizations might not fully capture users' perceptions of healthiness. The absence of a significant RMSE difference could also be influenced by underlying biases in user ratings or incomplete tag labeling. Future work could involve a deeper dive into other demographic factors or refine the tag processing to account for user-specific biases.
