@@ -1,11 +1,9 @@
-# Predicting Recipe Success: A Data-Driven Approach to Recipe Ratings
+# Predicting Recipe Ratings
 
 **Author:** Parth Shinde
 
 **Project Overview:**
 This project aims to predict the average rating of recipes on a popular cooking platform using various recipe features such as preparation time, number of ingredients, nutritional content, and user-provided tags. By developing a predictive model, this project seeks to enhance recipe recommendations and assist recipe creators in optimizing their content to meet user preferences.
-
-## Website Sections
 
 ### 1. Introduction
 This section introduces the dataset and the main question driving the project: "Can we predict the average rating of a recipe based on its features?" It explains the significance of this question and the potential applications of a successful predictive model.
@@ -24,8 +22,44 @@ This section details the steps taken to clean the data, including handling missi
 - Created new features such as `calories` and `description_length`.
 
 **Exploratory Analysis:**
-- **Univariate Analysis**: Distribution of ratings, preparation time, and other key features.
-- **Bivariate Analysis**: Relationship between preparation time and ratings, among other pairs.
+
+#### Univariate Analysis
+
+We explored the distribution of key variables to understand the overall patterns in the data.
+
+**Distribution of Average Ratings:**
+<iframe
+  src="assets/distribution_of_average_ratings.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The plot above shows that the distribution of average ratings is skewed towards higher values, with most ratings clustered around 4.5, indicating a generally positive reception of recipes.
+
+**Distribution of Calories:**
+<iframe
+  src="assets/distribution_of_calories.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Calories are heavily right-skewed, indicating the presence of recipes with exceptionally high calorie counts, pulling the mean above the median.
+
+#### Bivariate Analysis
+
+To explore potential relationships between variables, we examined how certain features interact with each other.
+
+**Top 10 Tags with the Highest Average Ratings:**
+<iframe
+  src="assets/top_tags_with_highest_ratings.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+This bar plot displays the top 10 tags associated with the highest average ratings. It highlights which types of recipes are most favorably reviewed, providing insights into user preferences based on recipe categorization.
 
 ### 3. Assessment of Missingness
 This section examines the nature of missing data in the dataset, exploring whether certain missing values are NMAR (Not Missing At Random) and conducting permutation tests to assess dependencies between missingness and other variables.
