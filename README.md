@@ -76,14 +76,16 @@ The missingness matrix  provides an overview of missing patterns in a manageable
 This thumbnail provides a quick overview of missing data patterns in the dataset. Click the thumbnail to explore the full interactive plot and gain deeper insights into the data structure.
 
 ### 4. Hypothesis Testing
-In this section, we state the hypotheses tested during the project, including the statistical tests used, significance levels, and conclusions drawn. We explored whether recipes with more than 10 ingredients have significantly different preparation times.
+I explored whether recipes with more than 10 ingredients have significantly different preparation times.
 
 **Hypotheses:**
-- Null Hypothesis: No significant difference in average preparation times between recipes with more than 10 ingredients and those with 10 or fewer.
-- Alternative Hypothesis: Significant difference in preparation times exists between the two groups.
+- **Null Hypothesis:** There is no significant difference in average preparation times between recipes with more than 10 ingredients and those with 10 or fewer.
+- **Alternative Hypothesis:** There is a significant difference in preparation times between the two groups.
 
 **Results:**
-- Report on test statistic, p-value, and conclusion.
+- **Observed Difference in Means:** -4.93 minutes
+- **P-value:** 0.8310
+- **Conclusion:** Fail to reject the null hypothesis; there is no significant difference in average preparation times between recipes with more than 10 ingredients and those with 10 or fewer. This suggests that the number of ingredients does not substantially impact the preparation time.
 
 ### 5. Framing a Prediction Problem
 This section clearly defines the prediction task as a regression problem to predict the average rating of recipes. It outlines the response variable, chosen evaluation metrics, and the rationale for selecting these features based on what is known at the time of prediction.
