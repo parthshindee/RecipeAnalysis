@@ -70,7 +70,12 @@ This section examines the nature of missing data in the dataset, exploring wheth
 
 The missingness matrix  provides an overview of missing patterns in a manageable format by visualizing a sample of the data. This plot helps us understand the structure of missingness and guides our analysis in determining whether data is missing at random or due to specific factors.
 
-**Plot Not Added Due to Slow Loading Times**
+**Missingness Matrix:**
+![Missingness Matrix Thumbnail](assets/missingness_matrix_thumbnail.png)
+
+[View Interactive Plot](assets/missingness_matrix.html)
+
+This thumbnail provides a quick overview of missing data patterns in the dataset. Click the thumbnail to explore the full interactive plot and gain deeper insights into the data structure.
 
 ### 4. Hypothesis Testing
 In this section, we state the hypotheses tested during the project, including the statistical tests used, significance levels, and conclusions drawn. We explored whether recipes with more than 10 ingredients have significantly different preparation times.
