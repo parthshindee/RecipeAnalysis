@@ -68,6 +68,16 @@ This section examines the nature of missing data in the dataset, exploring wheth
 - Explanation of NMAR columns and their potential impact on analysis.
 - Results of permutation tests showing which columns' missingness depends on other features.
 
+**Missingness Matrix:**
+<iframe
+  src="assets/missingness_matrix.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The missingness matrix above provides an overview of missing patterns in a manageable format by visualizing a sample of the data. This plot helps us understand the structure of missingness and guides our analysis in determining whether data is missing at random or due to specific factors.
+
 ### 4. Hypothesis Testing
 In this section, we state the hypotheses tested during the project, including the statistical tests used, significance levels, and conclusions drawn. We explored whether recipes with more than 10 ingredients have significantly different preparation times.
 
