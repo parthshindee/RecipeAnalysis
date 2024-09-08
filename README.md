@@ -74,6 +74,7 @@ This section examines the nature of missing data in the dataset, exploring wheth
   width="800"
   height="600"
   frameborder="0"
+  loading="lazy"
 ></iframe>
 
 The missingness matrix above provides an overview of missing patterns in a manageable format by visualizing a sample of the data. This plot helps us understand the structure of missingness and guides our analysis in determining whether data is missing at random or due to specific factors.
