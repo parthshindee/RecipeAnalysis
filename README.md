@@ -88,38 +88,79 @@ I explored whether recipes with more than 10 ingredients have significantly diff
 - **Conclusion:** Fail to reject the null hypothesis; there is no significant difference in average preparation times between recipes with more than 10 ingredients and those with 10 or fewer. This suggests that the number of ingredients does not substantially impact the preparation time.
 
 ### 5. Framing a Prediction Problem
-This section clearly defines the prediction task as a regression problem to predict the average rating of recipes. It outlines the response variable, chosen evaluation metrics, and the rationale for selecting these features based on what is known at the time of prediction.
-
 **Prediction Problem:**
-- **Type:** Regression
-- **Response Variable:** `rating`
-- **Evaluation Metric:** RMSE (Root Mean Squared Error) due to its sensitivity to prediction errors, which is crucial for predicting user satisfaction accurately.
+The goal of this project is to predict the average rating of a recipe based on its features, such as preparation time, number of ingredients, nutritional content, and user-provided tags. This is a regression problem, as the response variable (`rating`) is continuous.
+
+**Problem Type:** Regression
+
+**Response Variable:** `average_rating` — the average user rating of a recipe.
+
+**Features Used:**
+- `minutes`: Time required to prepare the recipe.
+- `n_ingredients`: Number of ingredients used.
+- `calories`, `protein`, and other nutritional values extracted from the `nutrition` column.
+- `description_length`: Length of the recipe's user-provided description.
+- `tags`: User-provided tags describing the recipe, processed as categorical features.
+
+**Evaluation Metric:**
+- **Root Mean Squared Error (RMSE):** Chosen due to its sensitivity to large errors, RMSE is a suitable metric for this regression problem because it penalizes significant deviations from actual ratings, making it ideal for measuring user satisfaction.
 
 ### 6. Baseline Model
-Describes the baseline model developed using a simple Linear Regression with basic features (`minutes`, `n_ingredients`). It reports on the preprocessing steps, the types of features used, and the initial model performance.
+**Baseline Model Approach:**
+The baseline model uses a simple Linear Regression model with basic features to provide a reference point for model performance.
 
-**Model Details:**
-- **Features Used:** `minutes`, `n_ingredients`
-- **Performance:** Cross-Validation RMSE ~0.71, Test Set R²: -0.0000
-- **Interpretation:** Baseline performance indicates that these basic features alone do not sufficiently capture the variance in recipe ratings.
+**Features Used:**
+- `minutes`
+- `n_ingredients`
+
+**Preprocessing:**
+- **Imputation:** Used mean imputation for missing values.
+- **Scaling:** Standardized numerical features using StandardScaler.
+
+**Model Pipeline:**
+A pipeline was created using `sklearn` to handle preprocessing and modeling in one streamlined process.
+
+**Performance:**
+- **Cross-Validation RMSE:** Approximately 0.71
+- **Test Set R²:** -0.0000
+
+**Interpretation:** The baseline model's performance indicates that these basic features alone do not sufficiently capture the variance in recipe ratings, as evidenced by the near-zero R² value.
 
 ### 7. Final Model
-Details the improvements made to the baseline model, including the addition of new features and the switch to Ridge regression with hyperparameter tuning. It discusses how the final model's performance compares to the baseline.
+The final model builds upon the baseline by incorporating additional features and applying Ridge regression with hyperparameter tuning to improve performance.
 
-**Model Details:**
-- **Added Features:** `calories`, `protein`, `description_length`
-- **Model Used:** Ridge Regression
-- **Hyperparameter Tuning:** Conducted using GridSearchCV with optimal `alpha = 1.0`
-- **Performance Improvement:** Final Model Test Set RMSE: 0.7255, indicating some improvement.
+**Features Added:**
+- `calories`, `protein`: Extracted from the `nutrition` column for deeper insights into recipe quality.
+- `description_length`: Length of the description text to gauge the potential influence of detailed descriptions on ratings.
+- **Categorical Feature Encoding:** Processed `tags` with OneHotEncoder to include user-provided tags.
+
+**Model Pipeline and Tuning:**
+A more sophisticated pipeline was created to handle both preprocessing and model fitting, with hyperparameters tuned using GridSearchCV.
+
+**Performance Improvement:**
+- **Best Hyperparameters:** `alpha = 1.0`
+- **Final Model Test Set RMSE:** 0.7255
+
+**Interpretation:** The final model shows improvement over the baseline by incorporating more features and using regularization to manage complexity, resulting in a slightly better RMSE.
 
 ### 8. Fairness Analysis
-This section assesses whether the final model performs differently across different recipe groups, specifically comparing "healthy" versus "non-healthy" recipes. A permutation test is used to determine if the observed differences are statistically significant.
+**Objective:**
+To assess whether the final model performs fairly across different recipe groups, specifically comparing "healthy" versus "non-healthy" recipes.
 
-**Fairness Analysis Results:**
-- **Groups Compared:** Healthy vs. Non-Healthy recipes
-- **Evaluation Metric:** RMSE
-- **Hypotheses:**
-  - Null: The model is fair with similar RMSE for both groups.
-  - Alternative: The model is unfair with different RMSE for the groups.
-- **Results:** Observed RMSE Difference: 0.0055, P-value: 0.7090. Conclusion: Fail to reject the null hypothesis; the model appears fair between the groups.
+**Groups Compared:**
+- **Healthy Recipes:** Recipes tagged with 'healthy'.
+- **Non-Healthy Recipes:** Recipes without the 'healthy' tag.
+
+**Evaluation Metric:**
+- **RMSE:** Used to measure prediction errors for each group.
+
+**Hypotheses:**
+- **Null Hypothesis:** The model is fair with similar RMSE for both healthy and non-healthy recipes.
+- **Alternative Hypothesis:** The model is unfair, with differing RMSE between the two groups.
+
+**Results:**
+- **Observed RMSE Difference:** 0.0055
+- **P-value:** 0.7090
+
+**Conclusion:** Fail to reject the null hypothesis; the model appears fair between the groups with similar RMSE for both healthy and non-healthy recipes.
 
